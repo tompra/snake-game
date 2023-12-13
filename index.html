@@ -14,24 +14,49 @@
     </head>
     <body>
         <!-- Layout -->
-        <div>
+        <div class="container">
+            <!-- Initial page -->
+            <div class="initial-page-container">
+                <img src="/snake-game-ai-gen.png" alt="snake-logo" id="logo" />
+
+                <h1 class="instruction-text">
+                    Use the arrow keys to move the snake
+                </h1>
+
+                <h1 class="instruction-text">
+                    Press spacebar to start the game
+                </h1>
+
+                <div class="select-size">
+                    <label for="board-size">Select board size:</label>
+                    <select id="board-size" onchange="changeBoardSize()">
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="40">40</option>
+                    </select>
+                </div>
+            </div>
+
             <!-- Scores -->
             <div class="scores">
                 <h1 id="score">000</h1>
                 <h1 id="highScore">000</h1>
             </div>
+
             <!-- Board game -->
-            <div class="game-border-1">
-                <div class="game-border-2">
-                    <div class="game-border-3">
-                        <div id="game-board"></div>
-                    </div>
-                </div>
+            <div class="game-border">
+                <div id="game-board"></div>
+            </div>
+
+            <!-- Arrow Keys -->
+            <div class="keys">
+                <div class="up arr"></div>
+                <br />
+                <div class="left arr"></div>
+                <div class="down arr"></div>
+                <div class="right arr"></div>
             </div>
         </div>
-        <!-- Initial page -->
-        <h1 id="instruction-text">Press spacebar to start the game</h1>
-        <img src="/snake-game-ai-gen.png" alt="snake-logo" id="logo" />
         <script src="script.js"></script>
     </body>
 </html>

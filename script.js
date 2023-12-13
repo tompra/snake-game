@@ -3,7 +3,6 @@ const score = document.querySelector('#score');
 const scores = document.querySelector('.scores');
 const highScoreText = document.querySelector('#highScore');
 const logo = document.querySelector('#logo');
-const board = document.querySelector('#board');
 const gameBoard = document.querySelector('#game-board');
 const gameBorder = document.querySelector('.game-border');
 const initialText = document.querySelector('.initial-page-container');
@@ -14,6 +13,8 @@ let direction = 'right';
 let gameStarted = false;
 let gameSpeedDelay = 200;
 let highScore = 0;
+let snake = [{ x: 10, y: 10 }];
+let food = [{ x: 20, y: 20 }];
 
 // Create snake or food element
 const createGameElement = (tag, className) => {
@@ -23,6 +24,11 @@ const createGameElement = (tag, className) => {
 };
 
 // Draw
+const drawGame = () => {
+    gameBoard.innerHTML = '';
+    drawSnake();
+    drawFood();
+};
 
 // Set position for snake and food
 const setPosition = (element, position) => {
@@ -31,8 +37,27 @@ const setPosition = (element, position) => {
 };
 
 // Draw snake
+const drawSnake = () => {
+    // for each segment it should call the snake element
+    snake.forEach((segment, index) => {
+        const snakeElement = createGameElement('div', 'snake');
+        setPosition(snakeElement, segment);
+
+        if (index === 0) {
+            snakeElement.classList.add('head');
+        } else if (index % 2 === 1) {
+            snakeElement.classList.add('rest-snake');
+        }
+        gameBoard.appendChild(snakeElement);
+    });
+};
 
 // Draw food
+const drawFood = () => {
+    const foodElement = createGameElement('div', 'food');
+    setPosition(foodElement, food);
+    gameBoard.appendChild(foodElement);
+};
 
 // Move
 
@@ -55,6 +80,7 @@ function changeBoardSize() {
     gameBoard.style.gridTemplateRows = `repeat(${selectSize}, 20px)`;
 }
 
+// Start game
 function startGame() {
     gameStarted = true;
     changeBoardSize();
@@ -62,8 +88,10 @@ function startGame() {
     gameBoard.style.display = 'grid';
     gameBorder.style.display = 'block';
     scores.style.display = 'block';
+    drawGame();
 }
 
+// Handle key press event
 function handleKeyPress(event) {
     // when pressing spacebar startgame
     if (
@@ -89,6 +117,7 @@ function handleKeyPress(event) {
     }
 }
 
+// Initial
 function init() {
     document.addEventListener('keydown', handleKeyPress);
 }

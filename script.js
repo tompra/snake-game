@@ -7,12 +7,20 @@ const board = document.querySelector('#board');
 const gameBoard = document.querySelector('#game-board');
 const gameBorder = document.querySelector('.game-border');
 const initialText = document.querySelector('.initial-page-container');
+const selectSize = document.querySelector('#board-size').value;
 
 // Game variables
 let direction = 'right';
 let gameStarted = false;
 let gameSpeedDelay = 200;
 let highScore = 0;
+
+// Create snake or food element
+const createGameElement = (tag, className) => {
+    const element = document.createElement(tag);
+    element.className = className;
+    return element;
+};
 
 // Draw
 
@@ -38,7 +46,6 @@ let highScore = 0;
 
 // Change grid size
 function changeBoardSize() {
-    const selectSize = document.querySelector('#board-size').value;
     console.log('Select size', selectSize);
     gameBoard.style.gridTemplateColumns = `repeat(${selectSize}, 20px)`;
     gameBoard.style.gridTemplateRows = `repeat(${selectSize}, 20px)`;
@@ -60,6 +67,21 @@ function handleKeyPress(event) {
         (!gameStarted && event.key === '')
     ) {
         startGame();
+    } else {
+        switch (event.key) {
+            case 'ArrowUp':
+                direction = 'up';
+                break;
+            case 'ArrowDown':
+                direction = 'down';
+                break;
+            case 'ArrowRight':
+                direction = 'right';
+                break;
+            case 'ArrowLeft':
+                direction = 'left';
+                break;
+        }
     }
 }
 

@@ -24,7 +24,11 @@ const createGameElement = (tag, className) => {
 
 // Draw
 
-// Draw map
+// Set position for snake and food
+const setPosition = (element, position) => {
+    element.style.gridColumn = position.x;
+    element.style.gridRow = position.y;
+};
 
 // Draw snake
 

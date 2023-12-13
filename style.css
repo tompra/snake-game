@@ -8,48 +8,23 @@ body {
     font-family: 'VT323', monospace;
 }
 
-body,
+body {
+    background-color: #1f2041;
+}
 .snake {
-    background-color: #414141;
+    background-color: #577590;
 }
 
 /* Board */
 #game-board {
     border-radius: 100px;
     display: grid;
-    grid-template-columns: repeat(20, 20px);
-    grid-template-rows: repeat(20, 20px);
     margin: 5px;
-    /* background-color: aqua; */
 }
-
-.game-border-1 {
-    border: #595f43 solid 8px;
-    border-radius: 10px;
-    box-shadow: inset 0 0 0 10px #595f43;
-}
-
-.game-border-2 {
-    border: #abb78a solid 10px;
-    border-radius: 26px;
-    box-shadow: inset 0 0 0 10px #abb78a;
-}
-
-.game-border-3 {
-    border: #8b966c solid 30px;
+.game-border {
+    border: #f08a4b solid 30px;
     border-radius: 20px;
-    box-shadow: inset 0 0 0 5px #8b966c;
-}
-/* Initial text */
-#instruction-text {
-    position: absolute;
-    top: 60%;
-    color: #333;
-    width: 300px;
-    text-align: center;
-    text-transform: capitalize;
-    padding: 30px;
-    margin: 0;
+    box-shadow: inset 0 0 0 5px #f08a4b;
 }
 
 /* Scores */
@@ -59,7 +34,7 @@ body,
 }
 
 #score {
-    color: #abb78a;
+    color: #d78a76;
 }
 
 #score,
@@ -74,20 +49,65 @@ body,
     display: none;
 }
 
-.game-border-3,
+.game-border,
 #logo {
-    background-color: #c4cfa3;
+    background-color: #d78a76;
 }
 
 .snake {
-    border: #5a5a5a 1px dotted;
+    border: #577590 1px dotted;
 }
 
 .food {
-    background-color: #dedede;
-    border: #999 5px solid;
+    background-color: #dfc5ff;
+    border: #7802ff 5px solid;
+}
+
+.head {
+    background-color: red;
+}
+.rest-snake {
+    background-color: #333;
+}
+
+.initial-page-container {
+    background-color: #d78a76;
+    height: 50vh;
+    width: 50vw;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    border-radius: 10px;
+    border: 5px solid blueviolet;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #logo {
-    position: absolute;
+    width: 250px;
+}
+
+.scores,
+.game-border,
+.game-board {
+    display: none;
+}
+.instruction-text {
+    color: #333;
+    text-align: center;
+    text-transform: capitalize;
+    margin: 0;
+    padding: 15px;
+}
+.select-size {
+    margin-top: 10px;
+}
+label {
+    font-size: 24px;
+    color: #333;
+}
+#board-size {
+    height: 24px;
 }

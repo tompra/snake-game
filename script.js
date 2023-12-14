@@ -14,7 +14,7 @@ let gameStarted = false;
 let gameSpeedDelay = 200;
 let highScore = 0;
 let snake = [{ x: 10, y: 10 }];
-let food = [{ x: 20, y: 20 }];
+let food;
 
 // Create snake or food element
 const createGameElement = (tag, className) => {
@@ -59,6 +59,13 @@ const drawFood = () => {
     gameBoard.appendChild(foodElement);
 };
 
+// Generate food
+const generateFood = () => {
+    const x = Math.floor(Math.random() * selectSize) + 1;
+    const y = Math.floor(Math.random() * selectSize) + 1;
+    return { x, y };
+};
+
 // Move
 
 // Increase speed
@@ -83,6 +90,7 @@ function changeBoardSize() {
 // Start game
 function startGame() {
     gameStarted = true;
+    food = generateFood();
     changeBoardSize();
     initialText.style.display = 'none';
     gameBoard.style.display = 'grid';

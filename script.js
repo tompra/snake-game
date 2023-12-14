@@ -6,15 +6,17 @@ const logo = document.querySelector('#logo');
 const gameBoard = document.querySelector('#game-board');
 const gameBorder = document.querySelector('.game-border');
 const initialText = document.querySelector('.initial-page-container');
-const selectSize = document.querySelector('#board-size').value;
+const selectSize = document.querySelector('#board-size');
 
 // Game variables
 let direction = 'right';
 let gameStarted = false;
 let gameSpeedDelay = 200;
+let gameInterval;
 let highScore = 0;
 let snake = [{ x: 10, y: 10 }];
 let food;
+let gridSize;
 
 // Create snake or food element
 const createGameElement = (tag, className) => {
@@ -54,19 +56,43 @@ const drawSnake = () => {
 
 // Draw food
 const drawFood = () => {
-    const foodElement = createGameElement('div', 'food');
-    setPosition(foodElement, food);
-    gameBoard.appendChild(foodElement);
+    if (gameStarted) {
+        const foodElement = createGameElement('div', 'food');
+        setPosition(foodElement, food);
+        gameBoard.appendChild(foodElement);
+    }
 };
 
 // Generate food
 const generateFood = () => {
-    const x = Math.floor(Math.random() * selectSize) + 1;
-    const y = Math.floor(Math.random() * selectSize) + 1;
+    gridSize = selectSize.value;
+    const x = Math.floor(Math.random() * gridSize) + 1;
+    const y = Math.floor(Math.random() * gridSize) + 1;
     return { x, y };
 };
 
 // Move
+const move = () => {
+    // shallow copy of the snake obkect targeting the first div in this case the head so as not make the snake bigger by oving
+    const head = { ...snake[0] };
+    switch (direction) {
+        case 'right':
+            head.x++;
+            break;
+        case 'up':
+            head.y--;
+            break;
+        case 'down':
+            head.y++;
+            break;
+        case 'left':
+            head.x--;
+            break;
+    }
+    // to make the snake head to be in front all time
+    snake.unshift(head);
+    snake.pop();
+};
 
 // Increase speed
 
@@ -82,9 +108,9 @@ const generateFood = () => {
 
 // Change grid size
 function changeBoardSize() {
-    console.log('Select size', selectSize);
-    gameBoard.style.gridTemplateColumns = `repeat(${selectSize}, 20px)`;
-    gameBoard.style.gridTemplateRows = `repeat(${selectSize}, 20px)`;
+    gridSize = selectSize.value;
+    gameBoard.style.gridTemplateColumns = `repeat(${gridSize}, 20px)`;
+    gameBoard.style.gridTemplateRows = `repeat(${gridSize}, 20px)`;
 }
 
 // Start game
@@ -96,7 +122,11 @@ function startGame() {
     gameBoard.style.display = 'grid';
     gameBorder.style.display = 'block';
     scores.style.display = 'block';
-    drawGame();
+    // every interval makes the snake to move
+    gameInterval = setInterval(() => {
+        drawGame();
+        move();
+    }, gameSpeedDelay);
 }
 
 // Handle key press event

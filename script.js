@@ -30,6 +30,7 @@ const drawGame = () => {
     gameBoard.innerHTML = '';
     drawSnake();
     drawFood();
+    updateScore();
 };
 
 // Set position for snake and food
@@ -94,27 +95,79 @@ const move = () => {
     // when the snake eat the food
     if (head.x === food.x && head.y === food.y) {
         food = generateFood();
+        increaseSpeed();
         clearInterval(gameInterval);
         gameInterval = setInterval(() => {
             move();
+            checkCollision();
             drawGame();
         }, gameSpeedDelay);
     } else {
         snake.pop();
     }
 };
+// UpdateScore
+const updateScore = () => {
+    const currentScore = snake.length - 1;
+    score.textContent = currentScore.toString().padStart(3, '0');
+};
+// UpdateHighScore
+const updateHighScore = () => {
+    const currentScore = snake.length - 1;
+    if (currentScore > highScore) {
+        highScore = currentScore;
+        highScoreText.textContent = highScore.toString().padStart(3, '0');
+    }
+    highScoreText.style.display = 'block';
+};
 
 // Increase speed
+const increaseSpeed = () => {
+    if (gameSpeedDelay > 150) {
+        gameSpeedDelay -= 5;
+    } else if (gameSpeedDelay > 100) {
+        gameSpeedDelay -= 3;
+    } else if (gameSpeedDelay > 50) {
+        gameSpeedDelay -= 2;
+    } else if (gameSpeedDelay > 25) {
+        gameSpeedDelay -= 1;
+    }
+};
 
 // Check collision
+const checkCollision = () => {
+    const head = snake[0];
+    gridSize = selectSize.value;
+    if (head.x < 1 || head.x > gridSize || head.y < 1 || head.y > gridSize) {
+        resetGame();
+    }
+    for (let i = 1; i < snake.length; i++) {
+        if (head.x === snake[i].x && head.y === snake[i].y) {
+            resetGame();
+        }
+    }
+};
 
 // Reset game
-
-// UpdateScore
+const resetGame = () => {
+    updateHighScore();
+    stopGame();
+    snake = [{ x: 10, y: 10 }];
+    food = generateFood();
+    direction = 'right';
+    gameSpeedDelay = 200;
+    updateScore();
+};
 
 // Stop game
-
-// UpdateHighScore
+const stopGame = () => {
+    clearInterval(gameInterval);
+    gameStarted = false;
+    initialText.style.display = 'flex';
+    scores.style.display = 'none';
+    gameBoard.style.display = 'none';
+    gameBorder.style.display = 'none';
+};
 
 // Change grid size
 function changeBoardSize() {
@@ -131,11 +184,12 @@ function startGame() {
     initialText.style.display = 'none';
     gameBoard.style.display = 'grid';
     gameBorder.style.display = 'block';
-    scores.style.display = 'block';
+    scores.style.display = 'flex';
     // every interval makes the snake to move
     gameInterval = setInterval(() => {
-        drawGame();
         move();
+        checkCollision();
+        drawGame();
     }, gameSpeedDelay);
 }
 

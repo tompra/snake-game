@@ -27,6 +27,10 @@
                     Press spacebar to start the game
                 </h1>
 
+                <h1 class="instruction-text">
+                    Press P to pause the game and to resume the game
+                </h1>
+
                 <div class="select-size">
                     <label for="board-size">Select board size:</label>
                     <select id="board-size" onchange="changeBoardSize()">
@@ -47,14 +51,10 @@
             <div class="game-border">
                 <div id="game-board"></div>
             </div>
-
-            <!-- Arrow Keys -->
-            <div class="keys">
-                <div class="up arr"></div>
-                <br />
-                <div class="left arr"></div>
-                <div class="down arr"></div>
-                <div class="right arr"></div>
+            <div id="pauseModal" class="modal">
+                <div class="modal-content">
+                    <h1>Game Paused</h1>
+                </div>
             </div>
         </div>
         <script src="script.js"></script>

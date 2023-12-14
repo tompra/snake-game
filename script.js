@@ -91,7 +91,17 @@ const move = () => {
     }
     // to make the snake head to be in front all time
     snake.unshift(head);
-    snake.pop();
+    // when the snake eat the food
+    if (head.x === food.x && head.y === food.y) {
+        food = generateFood();
+        clearInterval(gameInterval);
+        gameInterval = setInterval(() => {
+            move();
+            drawGame();
+        }, gameSpeedDelay);
+    } else {
+        snake.pop();
+    }
 };
 
 // Increase speed

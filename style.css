@@ -72,16 +72,16 @@ body {
 
 .initial-page-container {
     background-color: #d78a76;
-    height: 50vh;
+    height: 65vh;
     width: 50vw;
     position: absolute;
-    top: 25%;
+    top: 20%;
     left: 25%;
     border-radius: 10px;
-    border: 5px solid blueviolet;
+    border: 5px solid rgb(255, 162, 0);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -105,11 +105,11 @@ body {
     margin-top: 10px;
 }
 label {
-    font-size: 24px;
+    font-size: 28px;
     color: #333;
 }
 #board-size {
-    height: 24px;
+    height: 28px;
 }
 
 .modal {
@@ -125,9 +125,41 @@ label {
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: #d78a76;
     height: 10vh;
     width: 100%;
     text-align: center;
     padding: 20px;
+    border-top: 4px solid #1f2041;
+    border-bottom: 4px solid #1f2041;
+}
+.modal-content h1 {
+    animation: fadeInOut 2s ease-in-out infinite;
+}
+
+.key {
+    background-color: #333;
+    padding: 8px;
+    border-radius: 5px;
+    color: rgb(255, 162, 0);
+    border: 2px solid rgb(255, 162, 0);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
 }

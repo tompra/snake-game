@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -17,19 +18,11 @@
         <div class="container">
             <!-- Initial page -->
             <div class="initial-page-container">
-                <img src="/snake-game-ai-gen.png" alt="snake-logo" id="logo" />
-
-                <h1 class="instruction-text">
-                    Use the arrow keys to move the snake
-                </h1>
-
-                <h1 class="instruction-text">
-                    Press spacebar to start the game
-                </h1>
-
-                <h1 class="instruction-text">
-                    Press P to pause the game and to resume the game
-                </h1>
+                <img
+                    src="/img/snake-game-ai-gen.png"
+                    alt="snake-logo"
+                    id="logo"
+                />
 
                 <div class="select-size">
                     <label for="board-size">Select board size:</label>
@@ -39,21 +32,39 @@
                         <option value="40">40</option>
                     </select>
                 </div>
+
+                <h1 class="instruction-text">
+                    Use the <span class="key">&#9650;</span>
+                    <span class="key">&#9664;</span>
+                    <span class="key">&#9660;</span>
+                    <span class="key">&#9654;</span> to move the snake
+                </h1>
+
+                <h1 class="instruction-text">
+                    Press <span class="key">spacebar</span> to start the game
+                </h1>
+
+                <h1 class="instruction-text">
+                    Press <span class="key">P</span> to pause the game and to
+                    resume the game
+                </h1>
             </div>
 
-            <!-- Scores -->
+            <!-- scores -->
             <div class="scores">
                 <h1 id="score">000</h1>
                 <h1 id="highScore">000</h1>
             </div>
 
-            <!-- Board game -->
+            <!-- board game -->
             <div class="game-border">
                 <div id="game-board"></div>
             </div>
+            <!-- modal -->
             <div id="pauseModal" class="modal">
                 <div class="modal-content">
                     <h1>Game Paused</h1>
+                    <h2>Press <span class="key">P</span> to resume game</h2>
                 </div>
             </div>
         </div>

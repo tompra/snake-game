@@ -121,6 +121,8 @@ const updateHighScore = () => {
     if (currentScore > highScore) {
         highScore = currentScore;
         highScoreText.textContent = highScore.toString().padStart(3, '0');
+
+        localStorage.setItem('snakeHighScore', highScore);
     }
     highScoreText.style.display = 'block';
 };
@@ -154,7 +156,11 @@ const checkCollision = () => {
 
 // Reset game
 const resetGame = () => {
-    updateHighScore();
+    const storedHighScore = localStorage.getItem('snakeHighScore');
+    if (storedHighScore) {
+        highScore = parseInt(storedHighScore, 10);
+        highScoreText.textContent = highScore.toString().padStart(3, '0');
+    }
     stopGame();
     snake = [{ x: 10, y: 10 }];
     food = generateFood();
@@ -238,7 +244,6 @@ const pausedGame = () => {
 };
 
 // Resume game
-
 const resumeGame = () => {
     if (gameStarted && !pauseGame) {
         gameInterval = setInterval(() => {

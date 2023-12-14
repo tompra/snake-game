@@ -17,6 +17,7 @@ let highScore = 0;
 let snake = [{ x: 10, y: 10 }];
 let food;
 let gridSize;
+let pauseGame = false;
 
 // Create snake or food element
 const createGameElement = (tag, className) => {
@@ -75,35 +76,37 @@ const generateFood = () => {
 // Move
 const move = () => {
     // shallow copy of the snake obkect targeting the first div in this case the head so as not make the snake bigger by oving
-    const head = { ...snake[0] };
-    switch (direction) {
-        case 'right':
-            head.x++;
-            break;
-        case 'up':
-            head.y--;
-            break;
-        case 'down':
-            head.y++;
-            break;
-        case 'left':
-            head.x--;
-            break;
-    }
-    // to make the snake head to be in front all time
-    snake.unshift(head);
-    // when the snake eat the food
-    if (head.x === food.x && head.y === food.y) {
-        food = generateFood();
-        increaseSpeed();
-        clearInterval(gameInterval);
-        gameInterval = setInterval(() => {
-            move();
-            checkCollision();
-            drawGame();
-        }, gameSpeedDelay);
-    } else {
-        snake.pop();
+    if (!pauseGame) {
+        const head = { ...snake[0] };
+        switch (direction) {
+            case 'right':
+                head.x++;
+                break;
+            case 'up':
+                head.y--;
+                break;
+            case 'down':
+                head.y++;
+                break;
+            case 'left':
+                head.x--;
+                break;
+        }
+        // to make the snake head to be in front all time
+        snake.unshift(head);
+        // when the snake eat the food
+        if (head.x === food.x && head.y === food.y) {
+            food = generateFood();
+            increaseSpeed();
+            clearInterval(gameInterval);
+            gameInterval = setInterval(() => {
+                move();
+                checkCollision();
+                drawGame();
+            }, gameSpeedDelay);
+        } else {
+            snake.pop();
+        }
     }
 };
 // UpdateScore
@@ -214,6 +217,10 @@ function handleKeyPress(event) {
                 break;
             case 'ArrowLeft':
                 direction = 'left';
+                break;
+            case 'P':
+            case 'p':
+                pauseGame = !pauseGame;
                 break;
         }
     }

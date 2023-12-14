@@ -121,7 +121,7 @@ label {
     background-color: rgba(107, 107, 107, 0.7);
     justify-content: center;
     align-items: center;
-    display: flex;
+    display: none;
 }
 
 .modal-content {

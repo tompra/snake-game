@@ -7,6 +7,7 @@ const gameBoard = document.querySelector('#game-board');
 const gameBorder = document.querySelector('.game-border');
 const initialText = document.querySelector('.initial-page-container');
 const selectSize = document.querySelector('#board-size');
+const pauseModal = document.querySelector('#pauseModal');
 
 // Game variables
 let direction = 'right';
@@ -221,10 +222,33 @@ function handleKeyPress(event) {
             case 'P':
             case 'p':
                 pauseGame = !pauseGame;
+                if (pauseGame) {
+                    pausedGame();
+                } else {
+                    resumeGame();
+                }
                 break;
         }
     }
 }
+// Pause game
+const pausedGame = () => {
+    clearInterval(gameInterval);
+    pauseModal.style.display = 'flex';
+};
+
+// Resume game
+
+const resumeGame = () => {
+    if (gameStarted && !pauseGame) {
+        gameInterval = setInterval(() => {
+            move();
+            checkCollision();
+            drawGame();
+        }, gameSpeedDelay);
+        pauseModal.style.display = 'none';
+    }
+};
 
 // Initial
 function init() {

@@ -1,7 +1,12 @@
 # Snake game
 
+![Screenshot 2024-02-08 at 12 28 52](https://github.com/tompra/snake-game/assets/143709419/2fde6411-2ff6-4a5b-90e4-5f43ee803134)
+
 ## Description
 This repo contains the source for a classic Snake Game implemented using jQuery. The Snake Game is a timeless arcade classic where players control a snake that must navigation the game board, eat food, and grow longer while avoiding collisiong with iteself and the walls. 
+
+![Screenshot 2024-02-08 at 12 30 28](https://github.com/tompra/snake-game/assets/143709419/cc4f5259-74eb-4cd5-a623-21cef507ed1a)
+
 
 ## Objectives
   - Implement the player controls a snake that moves through grid-based game board.
